@@ -15,8 +15,7 @@ apt install unzip expect -y
 # Download and setup wordpress
 cd /var/www/html
 wget http://wordpress.org/latest.zip
-unzip latest.zip
-rm -rf latest.zip
+unzip latest.zip && rm -rf latest.zip
 chown -R www-data:www-data wordpress
 cd wordpress
 cp wp-config-sample.php wp-config.php
@@ -49,7 +48,6 @@ GRANT ALL PRIVILEGES ON $dbname.* TO '$dbuser'@'localhost' IDENTIFIED BY '$dbpas
 FLUSH PRIVILEGES;
 exit
 EOF
-echo "Configured db" >> /tmp/i.log
 cd /etc/apache2/sites-available
 echo >> wordpress.conf
 
@@ -72,7 +70,5 @@ CustomLog ${APACHE_LOG_DIR}/your_domain.com_access.log combined
 EOF1
 
 # disable default wp config and enable the new one
-a2enmod rewrite
-a2dissite 000-default.conf
-a2ensite wordpress.conf
+a2enmod rewrite && a2dissite 000-default.conf && a2ensite wordpress.conf
 service apache2 restart
