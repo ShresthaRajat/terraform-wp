@@ -1,0 +1,6 @@
+REGION        = "eu-west-2"
+KEY           = "Rajat"
+INSTANCE_TYPE = "t2.micro"
+VPC_CIDR      = "10.0.1.0/16"
+SUBNET_1_CIDR = "10.0.1.0/24"
+AZ1           = "ap-southeast-2a"
