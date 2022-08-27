@@ -3,7 +3,7 @@ variable "REGION" {
 }
 
 variable "KEY" {
-  default = "ID_RSA"
+  default = "ID_RSA.pub"
 }
 
 variable "INSTANCE_TYPE" {
@@ -11,7 +11,7 @@ variable "INSTANCE_TYPE" {
 }
 
 variable "VPC_CIDR" {
-  default = "10.0.1.0/16"
+  default = "10.0.0.0/16"
 }
 
 variable "SUBNET_1_CIDR" {
@@ -20,4 +20,8 @@ variable "SUBNET_1_CIDR" {
 
 variable "AZ1" {
   default = ""
+}
+
+variable "PRIV_KEY_PATH" {
+  default = "./ID_RSA"
 }

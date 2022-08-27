@@ -33,21 +33,15 @@ resource "aws_key_pair" "key" {
 # }
 
 
-# Create EC2 ( only after RDS is provisioned)
-# resource "aws_instance" "wordpressec2" {
-
-#   subnet_id       = aws_subnet.prod-subnet-public-1.id
-#   security_groups = ["${aws_security_group.ec2_allow_rule.id}"]
-#   user_data       = data.template_file.user_data.rendered
-
-# }
 
 resource "aws_instance" "wordpress" {
-  ami                    = data.aws_ami.ubuntu.id # "ami-05b891753d41ff88f" #ubuntu ami
-  instance_type          = var.INSTANCE_TYPE
-  vpc_security_group_ids = [aws_security_group.wordpress-sec-group.id]
-  user_data              = file("wordpress_script.sh")
-  key_name               = aws_key_pair.key.id
+  ami           = data.aws_ami.ubuntu.id # "ami-05b891753d41ff88f" #ubuntu ami
+  instance_type = var.INSTANCE_TYPE
+  # vpc_security_group_ids = [aws_security_group.wordpress-sec-group.id]
+  user_data       = file("wordpress_script.sh")
+  key_name        = aws_key_pair.key.id
+  subnet_id       = aws_subnet.public-subnet-1.id
+  security_groups = ["${aws_security_group.wordpress-sec-group.id}"]
   tags = {
     Name = "wordpress"
   }
